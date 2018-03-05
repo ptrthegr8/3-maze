@@ -53,7 +53,7 @@ for (var r = 0; r < board.length; r++) {
 }
 //activates arrow keys and moves player
 var boxtop = 458;
-var boxleft = 19;
+var boxleft = 8;
 
 'use strict';
 
@@ -69,6 +69,7 @@ document.addEventListener('keydown', (event) => {
             }
         } else if (board[posY + 1][posX] === "F") {
             winningPos = true;
+            console.log("morgan is dumbass");
         }
     }
     //
@@ -80,7 +81,8 @@ document.addEventListener('keydown', (event) => {
                 document.getElementById("player").style.top = boxtop + "px";
             }
         } else if (board[posY - 1][posX] === "F") {
-            winningPos= true;
+            winningPos = true;
+            console.log("morgan is dumbass");
         }
 
     }
@@ -93,7 +95,8 @@ document.addEventListener('keydown', (event) => {
                 document.getElementById("player").style.left = boxleft + "px";
             }
         } else if (board[posY][posX + 1] === "F") { 
-            winningPos === true;
+            winningPos = true;
+            console.log("morgan is dumbass");
         }
 
     }
@@ -106,13 +109,11 @@ document.addEventListener('keydown', (event) => {
                 document.getElementById("player").style.left = boxleft + "px";
             }
         } else if (board[posY][posX - 1] === "F") {
-            winningPos === true;
+            winningPos = true;
+            console.log("morgan is dumbass");
         }
     }
     if (winningPos) {
         alert("You win!")
     }
-    // console.log(boxtop);
-    // document.getElementById("player").style.top = boxtop + "px";
-    // document.getElementById("player").style.left = boxleft + "px";
 });
