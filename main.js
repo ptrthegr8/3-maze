@@ -1,29 +1,9 @@
-//activates arrow keys and moves player
-var boxtop = 200;
-var boxleft = 200;
+let gameBoard = document.getElementById("gameBoard");
 
-'use strict';
-
-document.addEventListener('keydown', (event) => {
-    const keyName = event.key;
-    console.log('keydown event\n\n' + 'key: ' + keyName);
-    if (keyName === "ArrowDown") {
-        boxtop += 10;
-    } else if (keyName === "ArrowUp") {
-        boxtop -= 10;
-    }
-    if (keyName === "ArrowRight") {
-        boxleft += 10;
-    } else if (keyName === "ArrowLeft") {
-        boxleft -= 10;
-    }
-    console.log(boxtop);
-    document.getElementById("box").style.top = boxtop + "px";
-    document.getElementById("box").style.left = boxleft + "px";
-});
-
-//map
-const map = [
+let posX = 0;
+let posY = 9;
+winningPos = false;
+let board = [
     "WWWWWWWWWWWWWWWWWWWWW",
     "W   W     W     W W W",
     "W W W WWW WWWWW W W W",
@@ -40,3 +20,99 @@ const map = [
     "W       W       W   W",
     "WWWWWWWWWWWWWWWWWWWWW"
 ];
+
+for (var r = 0; r < board.length; r++) {
+    var row = document.createElement("div");
+    row.classList.add("row");
+
+    for (var c = 0; c < board[r].length; c++) {
+        switch (board[r][c]) {
+            case "F":
+                var finish = document.createElement("div");
+                finish.classList.add("finish", "cell", "column");
+                row.appendChild(finish);
+                break;
+            case "W":
+                var wall = document.createElement("div");
+                wall.classList.add("wall", "cell", "column");
+                row.appendChild(wall);
+                break;
+            case "S":
+                var start = document.createElement("div");
+                start.classList.add("start", "cell", "column");
+                row.appendChild(start);
+                break;
+            case " ":
+                var empty = document.createElement("div");
+                empty.classList.add("cell", "column");
+                row.appendChild(empty);
+
+        }
+    }
+    gameBoard.appendChild(row)
+}
+//activates arrow keys and moves player
+var boxtop = 458;
+var boxleft = 19;
+
+'use strict';
+
+document.addEventListener('keydown', (event) => {
+    const keyName = event.key;
+    console.log('keydown event\n\n' + 'key: ' + keyName);
+    if (keyName === "ArrowDown") {
+        if (posY < 14 && posY > 0) {
+            if (board[posY + 1][posX] === " ") {
+                boxtop += 50;
+                posY += 1;
+                document.getElementById("player").style.top = boxtop + "px";
+            }
+        } else if (board[posY + 1][posX] === "F") {
+            winningPos = true;
+        }
+    }
+    //
+    if (keyName === "ArrowUp") {
+        if (posY < 14 && posY > 0) {
+            if (board[posY - 1][posX] === " ") {
+                boxtop -= 50;
+                posY -= 1;
+                document.getElementById("player").style.top = boxtop + "px";
+            }
+        } else if (board[posY - 1][posX] === "F") {
+            winningPos= true;
+        }
+
+    }
+    //
+    if (keyName === "ArrowRight") {
+        if (posX < 21 && posX >= 0) {
+            if (board[posY][posX + 1] === " ") {
+                posX += 1;
+                boxleft += 50;
+                document.getElementById("player").style.left = boxleft + "px";
+            }
+        } else if (board[posY][posX + 1] === "F") { 
+            winningPos === true;
+        }
+
+    }
+    //
+    if (keyName === "ArrowLeft") {
+        if (posX < 21 && posX >= 0) {
+            if (board[posY][posX - 1] === " ") {
+                posX -= 1;
+                boxleft -= 50;
+                document.getElementById("player").style.left = boxleft + "px";
+            }
+        } else if (board[posY][posX - 1] === "F") {
+            winningPos === true;
+        }
+    }
+    if (winningPos) {
+        alert("You win!")
+    }
+    // console.log(boxtop);
+    // document.getElementById("player").style.top = boxtop + "px";
+    // document.getElementById("player").style.left = boxleft + "px";
+});
