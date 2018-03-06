@@ -49,7 +49,7 @@ for (var r = 0; r < board.length; r++) {
 
         }
     }
-    gameBoard.appendChild(row)
+    gameBoard.appendChild(row);
 }
 //activates arrow keys and moves player
 var boxtop = 458;
@@ -67,9 +67,6 @@ document.addEventListener('keydown', (event) => {
                 posY += 1;
                 document.getElementById("player").style.top = boxtop + "px";
             }
-        } else if (board[posY + 1][posX] === "F") {
-            winningPos = true;
-            console.log("morgan is dumbass");
         }
     }
     //
@@ -79,24 +76,20 @@ document.addEventListener('keydown', (event) => {
                 boxtop -= 50;
                 posY -= 1;
                 document.getElementById("player").style.top = boxtop + "px";
-            }
-        } else if (board[posY - 1][posX] === "F") {
-            winningPos = true;
-            console.log("morgan is dumbass");
+            } 
         }
 
     }
-    //
+    // Only way to win is with right arrow key
     if (keyName === "ArrowRight") {
         if (posX < 21 && posX >= 0) {
             if (board[posY][posX + 1] === " ") {
                 posX += 1;
                 boxleft += 50;
                 document.getElementById("player").style.left = boxleft + "px";
+            } else if (board[posY][posX + 1] === "F") {
+                winningPos = true;
             }
-        } else if (board[posY][posX + 1] === "F") { 
-            winningPos = true;
-            console.log("morgan is dumbass");
         }
 
     }
@@ -108,12 +101,9 @@ document.addEventListener('keydown', (event) => {
                 boxleft -= 50;
                 document.getElementById("player").style.left = boxleft + "px";
             }
-        } else if (board[posY][posX - 1] === "F") {
-            winningPos = true;
-            console.log("morgan is dumbass");
         }
     }
     if (winningPos) {
-        alert("You win!")
+        alert("You win!");
     }
 });

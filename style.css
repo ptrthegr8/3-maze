@@ -1,8 +1,10 @@
-body {
-    max-width: 1000px;
+
+html {
+    min-width: 1059px;
+    margin: 0;
 }
+
 #gameBoard{
-    /* max-width: 1000px; */
     margin: 0 auto;
 }
 
